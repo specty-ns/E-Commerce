@@ -1,0 +1,168 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+{% if request.session.id %}
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>{{request.session.username}}</h1>
+					<nav class="d-flex align-items-center">
+						<a href="{% url 'home' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="">Profile</a>
+					</nav> 
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+	<!--================Login Box Area =================-->
+	<section class="login_box_area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="">
+                        <div class="col-md-12 form-group">
+								<a class="genric-btn success circle" href="{% url 'editprofile' request.session.id %}">Edit</a>
+                            
+                        </div>
+                            
+                            <div class="col-md-12 form-group">
+                                <label for="">First Name:</label>
+                                {{user.user_id.first_name}} 
+							</div>
+                            <div class="col-md-12 form-group">
+                                <label for="">Last Name:</label>
+                                {{user.user_id.last_name}} 
+							</div>
+                            <div class="col-md-12 form-group"> 
+                                <label for="">E-Mail:</label>
+                                {{user.user_id.email}} 
+							</div>
+                            <div class="col-md-12 form-group">
+                               <label for="">Mobile Number:</label>
+							   {{user.phone_number}}
+							</div>
+							<div class="col-md-12 form-group">
+                                <label for="">Alternate Mobile Number:</label>
+								{{user.alt_phone_number}}
+							</div> 
+
+						
+							<!-- <div class="col-md-12 form-group">
+								<button type="submit" value="submit" class="primary-btn">Register</button>
+								
+							</div> -->
+						
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="">
+                           
+                            <div class="col-md-12 form-group">
+                                <label for="">Shipping Address Lane 1:</label>
+								{{user.address_line1}}
+    						</div>
+                            <div class="col-md-12 form-group">
+                                <label for="">Shipping Address Lane 2:</label>
+								{{user.address_line2}}
+    						</div>
+                            <div class="col-md-12 form-group">
+                                <label for="">City:</label>	
+								{{user.city}}
+    						</div>
+                            <div class="col-md-12 form-group">
+                                <label for="">State:</label>	
+								{{user.state}}
+    						</div>
+                            <div class="col-md-12 form-group"> 
+                                <label for="">Country:</label>	
+								{{user.country}}	
+    						</div>
+                            <div class="col-md-12 form-group">
+                                <label for="">Zipcode:</label>
+								{{user.zipcode}}		
+    						</div>
+							
+
+						
+							<!-- <div class="col-md-12 form-group">
+								<button type="submit" value="submit" class="primary-btn">Register</button>
+								
+							</div> -->
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Login Box Area =================-->
+	{% else %}
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Login/Register</h1>
+					<nav class="d-flex align-items-center">
+						<a href="{% url 'home' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="">Login</a>
+					</nav> 
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+	
+	<!--================Login Box Area =================-->
+	<section class="login_box_area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="login_box_img">
+						<img class="img-fluid" src="{% static 'img/login.jpg' %}" alt="">
+						<div class="hover">
+							<h4>New to our website?</h4>
+							<p>There are advances being made in science and technology everyday, and a good example of this is the</p>
+							<a class="primary-btn" href="{% url 'registrationpage' %}">Create an Account</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="login_form_inner">
+						<h3>Log in to enter</h3>
+						{% if msg %}
+						<p style="color: red;">{{msg}}</p>
+						{% endif %}
+						{% if token %}
+						<p style="color: red;">{{token}}</p>
+						{% endif %}
+						<form class="row login_form" action="{% url 'login' %}" method="post" id="contactForm" novalidate="novalidate">
+							{% csrf_token %}
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="name" name="username" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="password" class="form-control" id="name" name="pass" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+							</div>
+							<div class="col-md-12 form-group">
+								<div class="creat_account">
+									<input type="checkbox" id="f-option2" name="selector">
+									<label for="f-option2">Keep me logged in</label>
+								</div>
+							</div>
+							<div class="col-md-12 form-group">
+								<button type="submit" value="submit" class="primary-btn">Log In</button>
+								<a href="#">Forgot Password?</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	{% endif %}
+
+	<!-- start footer Area -->
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>{{request.session.username}}</h1>
+					<nav class="d-flex align-items-center">
+						<a href="{% url 'home' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="">Profile</a>
+					</nav> 
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+	<!--================Login Box Area =================-->
+	<section class="login_box_area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="">
+                        
+                            <form method="post" action="{% url 'uprofile' pk=request.session.id %}">
+								{% csrf_token %}
+                                <div class="col-md-12 form-group">
+                                    <label for="">First Name:</label>
+                                    <input type="text" name="fname"class="form-control"  value="{{profile.user_id.first_name}}" id="">
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label for="">Last Name:</label>
+                                    <input type="text" name="lname" class="form-control" value="{{profile.user_id.last_name}}" id="">
+                                   
+                                </div>
+                                <div class="col-md-12 form-group"> 
+                                    <label for="">E-Mail:</label>
+                                    {{profile.user_id.email}} 
+                                </div>	
+                                <div class="col-md-12 form-group">
+                                   <label for="">Mobile Number:</label>
+                                   <input type="number" name="mob"class="form-control"  value="{{profile.phone_number}}" id="">
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label for="">Alternate Mobile Number:</label>
+                                    <input type="number" name="altmob"class="form-control"  value="{{profile.alt_phone_number}}" id="">
+                                </div> 
+
+						
+							<div class="col-md-12 form-group">
+								
+								<button class="genric-btn success circle" style="padding: 0px 40px 0px 40px ;">Update</button>
+								
+							</div>
+						
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="">
+                           
+                            <div class="col-md-12 form-group">
+                                <label for="">Shipping Address Line 1:</label>
+                                <input type="text" name="line1" class="form-control" value="{{profile.address_line1}}" id="">
+    						</div>
+                            <div class="col-md-12 form-group">
+                                <label for="">Shipping Address Line 2:</label>
+                                <input type="text" name="line2"class="form-control"  value="{{profile.address_line2}}" id="">
+    						</div>
+                            <div class="col-md-12 form-group">
+                                <label for="">City:</label>	
+                                <input type="text" name="city" class="form-control" value="{{profile.city}}" id="">
+    						</div>
+                            <div class="col-md-12 form-group">
+                                <label for="">State:</label>	
+                                <input type="text" name="state"class="form-control"  value="{{profile.state}}" id="">
+    						</div>
+                            <div class="col-md-12 form-group"> 
+                                <label for="">Country:</label>	
+                                <input type="text" name="country"class="form-control"  value="{{profile.country}}" id="">	
+    						</div>
+                            <div class="col-md-12 form-group">
+                                <label for="">Zipcode:</label>	
+                                <input type="number" name="zip"class="form-control"  value="{{profile.zipcode}}" id="">	
+    						</div>
+							
+						</form>
+						
+							<!-- <div class="col-md-12 form-group">
+								<button type="submit" value="submit" class="primary-btn">Register</button>
+								
+							</div> -->
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Login Box Area =================-->
+
+	<!-- start footer Area -->
+{% endblock %}

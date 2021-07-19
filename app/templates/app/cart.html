@@ -1,0 +1,156 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>{{request.session.username}}</h1>
+					<nav class="d-flex align-items-center">
+						<a href="{% url 'home' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="{% url 'brands' %}">Shop<span class="lnr lnr-arrow-right"></span></a>
+						<a href="">Cart</a>
+					</nav>  
+				</div>
+			</div>
+		</div>
+	</section>
+    <!-- End Banner Area -->
+
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        {% if cartdata %}
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                       
+                        <tbody>
+                            
+                            {% for cart in cartdata %}
+                            <tr>
+                                <td>
+                                    
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img src="{{MEDIA_URL}}{{cart.product_id.product_image}}" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <p>₹{{cart.product_id.product_name}}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>{{cart.product_id.product_price}}</h5>
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        {{cart.cart_quantity}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>₹{{cart.cart_subtotal}}</h5>
+                                </td>
+                                
+                            </tr>   
+                            {% endfor %}
+                            <tr class="bottom_button">
+                                <td>
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <h5>Subtotal</h5>
+                                </td>
+                                <td>
+                                    <h5>₹{{subtotal}}</h5>
+                                </td>
+                            </tr>
+                            <tr class="shipping_area">
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <h5>Tax:</h5> (18%)
+                                </td>
+                                <td>
+                                    +₹{{tax}}
+                                   
+                                </td>
+                            </tr>
+                            <tr class="shipping_area">
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <h5>Grand Total:</h5>
+                                </td>
+                                <td>
+                                    <h5>₹{{total}}</h5>
+                                </td>
+                            </tr>
+                            <tr class="out_button_area">
+                                <td></td><td></td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <div class="checkout_btn_inner d-flex align-items-center">                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <form action="{% url 'buy' %}" method="post">
+                                            {% csrf_token %}
+                                            {% for c in cartdata %}
+                                            <input type="hidden" name="cid" value="{{c.profile_id.id}}">.
+                                            <input type="hidden" name="pid" value="{{c.product_id.id}}">
+                                        <center>
+                                            
+                                                
+                                                {% endfor %}
+                                                <button class="primary-btn">Buy</button>
+                                                
+                                            </form>
+                                        </center>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        {% else %}
+
+                         <center> Your cart is empty</center>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Cart Area =================-->
+{% endblock %}
