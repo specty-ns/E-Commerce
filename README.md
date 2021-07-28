@@ -1,6 +1,6 @@
 # E-Commerce
-
-This is to inform you that to run this project you need to create "Virtual Environment". Virtual Environment provides an isolation environment for python files.
+To whomsoever it may concern,
+to run this project you need to create "Virtual Environment". Virtual Environment provides an isolation environment for python files.
 
 The following steps will guide you to create Virtutal Environment and this code should be executed in cmd and directory will be the folder in which you stored this project.
 
